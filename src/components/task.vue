@@ -1,15 +1,26 @@
 <script setup>
-import {onMounted,shallowRef,defineAsyncComponent} from 'vue';
+import {onMounted,shallowRef,defineAsyncComponent, useTemplateRef} from 'vue';
 const props = defineProps({
-  windowTitle: {
-    type: String,
-    required: true,
-  },  
-  windowDomain: {
-    type: String,
-    required: true,
-  },
-  
+    windowTitle: {
+        type: String,
+        required: true,
+    },  
+    windowDomain: {
+        type: String,
+        required: true,
+    },
+    windowWidth: {
+        type: String,
+        default: '900px',
+    },
+    windowHeight: {
+        type: String,
+        default: '600px',
+    },
+    allowStretch: {
+        type: Boolean,
+        default: true,
+    },
 })
 import closeIcon from './icons/IconCloseWindow.vue'
 const func_moudle = import.meta.glob('./windowDomain/*.vue');
@@ -78,6 +89,15 @@ onMounted(() => {
             document.getElementById(taskListid).classList.add('normalLabel');
         });
     });
+
+    const windowBody = document.getElementById(props.windowTitle+'_Window');
+    if (props.allowStretch) {
+        windowBody.style.overflow = 'hidden';
+        windowBody.style.resize = 'both';
+    }
+    windowBody.style.width = props.windowWidth;
+    windowBody.style.height = props.windowHeight;
+    
 });
 
 </script>
@@ -95,7 +115,7 @@ onMounted(() => {
         <div class = "domain">
             <component v-for="(task, index) in taskfunc_moudle" :key="index+2"
             :is="task.component"
-            v-bind="task.props"
+            v-bind="task.props"     
         />
         </div>
     </div>

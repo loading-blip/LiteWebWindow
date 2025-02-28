@@ -3,6 +3,8 @@ import {defineAsyncComponent,getCurrentInstance, shallowRef} from 'vue';
 
 var taskList = getCurrentInstance().appContext.config.globalProperties.$taskList;
 
+import startIcon from './components/icons/IconMicrosofr.vue'
+
 const components = import.meta.glob('./components/*.vue');
 // 处理任务列表生成组件数组
 const taskComponents = shallowRef([]);
@@ -33,7 +35,7 @@ console.log(taskComponents.value);
       />
   <div id="taskBar">
       <ul>
-          <li>icon</li>
+          <li><startIcon/></li>
       </ul>
   </div>
 </template>

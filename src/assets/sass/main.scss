@@ -4,12 +4,15 @@ $h1Width : 100%;
 $setDisplay: block;
 $closeWindowBarHeight: 40px;
 .window{
+    position: absolute;
+    left: 5%;
+    top: 5%;
     width: $windowW;
     height: $windowH;
     background-color: #9de9ae;
     border: gray solid 5px;
     display: $setDisplay;
-    box-shadow: 10px 10px 0px darkgray;
+    box-shadow: 10px 10px 0px rgba(53, 53, 53, 0.3);
 }
 .draggable-handle{
     cursor: grab;
@@ -74,3 +77,29 @@ $closeWindowBarHeight: 40px;
     align-items: center;
 
 }
+.window::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 10px;
+    height: 10px;
+    background: 
+      repeating-linear-gradient(
+        45deg,
+        #00000033 0px,
+        #00000033 2px,
+        transparent 2px,
+        transparent 4px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        #00000033 0px,
+        #00000033 2px,
+        transparent 2px,
+        transparent 4px
+      );
+    box-shadow: 
+      2px 0 0 #00000033,
+      0 2px 0 #00000033;
+  }

@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import './assets/css/main.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
@@ -17,7 +16,7 @@ function addTask(taskName) {
     // taskName = taskName.replace(' ', '_');
     const taskBar = document.getElementById('taskBar').querySelector('ul');
     var task = document.createElement('li');
-    task.innerHTML = taskName;
+    task.innerHTML = `<a>${taskName}</a>`;
     task.id = taskName;
     task.classList.add('taskList',"normalLabel");
     task.addEventListener('click', () => {
