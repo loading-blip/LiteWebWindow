@@ -8,8 +8,8 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 const app = createApp(App)
 
 var taskList = {
-    "task1": "domain",
-    "task2": "domain",
+    "公告": "noticeBoard",
+    "task2": "example",
 };
 app.config.globalProperties.$taskList = taskList;
 

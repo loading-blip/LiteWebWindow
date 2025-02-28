@@ -8,7 +8,7 @@ const components = import.meta.glob('./components/*.vue');
 const taskComponents = shallowRef([]);
 
 Object.entries(taskList).forEach(([taskName, domain]) => {
-  const componentPath = `./components/${taskName}.vue`;
+  const componentPath = `./components/task.vue`;
   
   if (components[componentPath]) {
     taskComponents.value.push({
@@ -20,8 +20,7 @@ Object.entries(taskList).forEach(([taskName, domain]) => {
     });
   }
 });
-
-
+console.log(taskComponents.value);
 </script>
 
 

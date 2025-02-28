@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted} from 'vue';
+import {onMounted,shallowRef,defineAsyncComponent} from 'vue';
 const props = defineProps({
   windowTitle: {
     type: String,
@@ -12,14 +12,15 @@ const props = defineProps({
   
 })
 import closeIcon from './icons/IconCloseWindow.vue'
-import domain from './windowDomain/domain.vue'
-
+const func_moudle = import.meta.glob('./windowDomain/*.vue');
+const taskfunc_moudle = shallowRef([]);
+taskfunc_moudle.value.push({
+    component: defineAsyncComponent(() => func_moudle[`./windowDomain/${props.windowDomain}.vue`]()),
+      props: {}});
 onMounted(() => {
     var maxZIndex = 0;
     //window
-    console.log(document.body);
     const draggableHandles = document.querySelectorAll('.draggable-handle');
-    console.log(draggableHandles);
     draggableHandles.forEach(handle => {
         let currentContainer, offsetX, offsetY;
 
@@ -92,7 +93,10 @@ onMounted(() => {
             </a>
         </div>
         <div class = "domain">
-            <domain />
+            <component v-for="(task, index) in taskfunc_moudle" :key="index+2"
+            :is="task.component"
+            v-bind="task.props"
+        />
         </div>
     </div>
 </template>
