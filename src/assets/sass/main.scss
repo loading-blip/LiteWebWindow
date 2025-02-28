@@ -1,0 +1,76 @@
+$windowW: 900px;
+$windowH: 600px;
+$h1Width : 100%;
+$setDisplay: block;
+$closeWindowBarHeight: 40px;
+.window{
+    width: $windowW;
+    height: $windowH;
+    background-color: #9de9ae;
+    border: gray solid 5px;
+    display: $setDisplay;
+    box-shadow: 10px 10px 0px darkgray;
+}
+.draggable-handle{
+    cursor: grab;
+}
+.WindowTitle{
+    width: $h1Width;
+    font-size: 20px;
+    // color: rgba(0, 0, 0, 0.8);
+    // font-weight: bold;
+}
+.windowTitleBar{
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: gray solid 2px;
+    height: $closeWindowBarHeight;
+    .closeWindow{
+        cursor: pointer;
+    }
+    
+}
+.draggable-container{
+    position: absolute;
+}
+.closeWindow{
+    padding: 0;
+    background-color: #85ca94;
+    border-bottom: gray solid 2px;
+    transition: 0.1s;
+    position: absolute;
+    // justify-content: right;
+    border-left: gray solid 2px;
+    width: fit-content;
+    padding: 10px;
+    right: 0;
+    top: 0;
+    text-decoration: none;
+    color: black;
+    height: $closeWindowBarHeight;
+    width: 40px;
+    height: 40px;
+    svg{
+        position:absolute;
+        top:50%;
+        bottom:50%;
+        transform:translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+    }
+}
+.closeWindow:hover{
+    background-color: rgb(255, 109, 109);
+}
+.closeWindow:active{
+    background-color: rgb(131, 57, 57);
+}
+
+.domain>p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

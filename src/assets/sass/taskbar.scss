@@ -1,0 +1,70 @@
+$barFontColor:white;
+#taskBar{
+    width: 100%;
+    height: 54px;
+    border-top: gray solid 4px;
+    background-color: darkgray;
+    position: absolute;
+    bottom: 0;
+    user-select : none;
+    box-shadow: 0 -3px 2px gray;
+    z-index: 9999;
+    // transform: translateY(-100%);
+    ul{
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+        height: 50px;
+        li{
+            margin: 0;
+            display: inline-block;
+            line-height: 50px;
+            width: 200px;
+            border-right: gray solid 2px;
+            text-align: center;
+            height: 50px;
+            cursor: pointer;
+            .taskLabel{
+                min-width: 100px;
+                width: justify-content;
+            }
+            a{
+                text-decoration: none;
+                color: $barFontColor;
+                font-size: 20px;
+                svg{
+                    vertical-align: middle;
+                    margin-right: 10px;
+                }
+            }
+            svg{
+                vertical-align: middle;
+                width: 30px;
+                height: 50px;
+                color: $barFontColor;
+            }
+        }
+        li:first-child{
+            width: 50px;
+        }
+        li:hover{
+            background-color: rgb(150, 150, 150);
+        }
+    }
+}
+.taskList{
+    display: list-item;
+}
+.pressedLabel{
+    background-color: gray;
+}
+.normalLabel{
+    background-color: darkgray;
+}
+.normalLabel:hover{
+    background-color: rgb(102, 102, 102);
+}
+.normalLabel:checked{
+    background-color: rgb(59, 59, 59);
+}
