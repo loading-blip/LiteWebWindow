@@ -1,9 +1,8 @@
-import {getCurrentInstance} from 'vue';
-
 var maxZIndex = 0;
+document.addEventListener('loadComplete', (event) => {
     //window
-    let prop = getCurrentInstance().appContext.config.globalProperties;
-    const draggableHandles = prop.$draggable_handle;
+    console.log(document.body);
+    const draggableHandles = document.querySelectorAll('.draggable-handle');
     console.log(draggableHandles);
     draggableHandles.forEach(handle => {
         let currentContainer, offsetX, offsetY;
@@ -37,7 +36,7 @@ var maxZIndex = 0;
         handle.addEventListener('touchstart', startDrag);
     });
 
-    const draggableContainers = prop.$draggable_container;
+    const draggableContainers = document.querySelectorAll('.draggable-container');
     draggableContainers.forEach(container => {
         container.addEventListener('mousedown', () => {
             // Bring the clicked container to the front
@@ -52,7 +51,7 @@ var maxZIndex = 0;
     });
 
     // Close window button
-    const closeButtons = prop.$closeWindow;
+    const closeButtons = document.querySelectorAll('.closeWindow');
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
             const container = button.parentElement.parentElement;
@@ -62,3 +61,4 @@ var maxZIndex = 0;
             document.getElementById(taskListid).classList.add('normalLabel');
         });
     });
+});

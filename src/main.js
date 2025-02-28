@@ -12,9 +12,6 @@ var taskList = {
     "task2": "domain",
 };
 app.config.globalProperties.$taskList = taskList;
-app.config.globalProperties.$draggable_handle = [];
-app.config.globalProperties.$closeWindow = [];
-app.config.globalProperties.$draggable_container = [];
 
 function addTask(taskName) {
     // taskName = taskName.replace(' ', '_');
