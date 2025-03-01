@@ -1,5 +1,7 @@
 <script setup>
 import {onMounted,shallowRef,defineAsyncComponent, useTemplateRef} from 'vue';
+import closeIcon from './icons/IconCloseWindow.vue'
+import '../assets/scss/main.scss'
 const props = defineProps({
     windowTitle: {
         type: String,
@@ -22,7 +24,7 @@ const props = defineProps({
         default: true,
     },
 })
-import closeIcon from './icons/IconCloseWindow.vue'
+
 const func_moudle = import.meta.glob('./windowDomain/*.vue');
 const taskfunc_moudle = shallowRef([]);
 taskfunc_moudle.value.push({
@@ -122,10 +124,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@import '../assets/css/main.css';
 .window {
     display: none;
 }
-
-
 </style>

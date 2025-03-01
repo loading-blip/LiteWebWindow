@@ -4,13 +4,14 @@ import {defineAsyncComponent,getCurrentInstance, shallowRef} from 'vue';
 var taskList = getCurrentInstance().appContext.config.globalProperties.$taskList;
 
 import startIcon from './components/icons/IconMicrosofr.vue'
+import './assets/scss/taskbar.scss'
 
 const components = import.meta.glob('./components/*.vue');
 // 处理任务列表生成组件数组
 const taskComponents = shallowRef([]);
 
 Object.entries(taskList).forEach(([taskName, domain]) => {
-  const componentPath = `./components/task.vue`;
+  const componentPath = `./components/windowTemplate.vue`;
   
   if (components[componentPath]) {
     taskComponents.value.push({
@@ -42,6 +43,6 @@ console.log(taskComponents.value);
 
 
 <style>
-@import './assets/css/taskbar.css';
-@import './assets/css/main.css';
+
+
 </style>

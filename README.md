@@ -1,5 +1,19 @@
-# Vue 3 + Vite
+# LiteWindow Program
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+`ver 0.1`
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+My first frontend program.
+
+Modify taskList var in main.js to add some new window (current usage method)
+
+---
+
+Current plan:
+
+* First runnable version (Done?)
+* Interactive addition of window functionality (Unfinished)
+* Window style control (Unfinished)
+
+etc....
+
+Require `node v22.12.0(Dev env)`.Useage `npm install` to install dependency package.
