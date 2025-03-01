@@ -53,9 +53,6 @@ $barFontColor:white;
         }
     }
 }
-.taskList{
-    display: list-item;
-}
 
 .pressedLabel{
     background-color: gray;
@@ -70,6 +67,7 @@ $barFontColor:white;
 .normalLabel:hover{
     background-color: rgb(102, 102, 102);
 }
+//:hover会把:active覆盖，所以使用更优先级的方式
 #taskBar>ul>li:active{
     background-color: rgb(99, 99, 99);
 }

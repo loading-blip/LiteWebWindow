@@ -14,5 +14,8 @@ template{
 }
 p{
     margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

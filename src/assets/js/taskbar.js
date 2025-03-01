@@ -1,6 +1,6 @@
 var maxZIndex = 0;
+//窗口拖拽效果(兼容触控)
 document.addEventListener('loadComplete', (event) => {
-    //window
     console.log(document.body);
     const draggableHandles = document.querySelectorAll('.draggable-handle');
     console.log(draggableHandles);
@@ -11,7 +11,7 @@ document.addEventListener('loadComplete', (event) => {
             currentContainer = handle.parentElement;
             offsetX = (e.clientX || e.touches[0].clientX) - currentContainer.offsetLeft;
             offsetY = (e.clientY || e.touches[0].clientY) - currentContainer.offsetTop;
-            document.body.style.userSelect = 'none'; // Prevent text selection
+            document.body.style.userSelect = 'none'; 
 
             function onMove(e) {
                 currentContainer.style.left = `${(e.clientX || e.touches[0].clientX) - offsetX}px`;
@@ -23,15 +23,13 @@ document.addEventListener('loadComplete', (event) => {
                 document.removeEventListener('mouseup', stopDrag);
                 document.removeEventListener('touchmove', onMove);
                 document.removeEventListener('touchend', stopDrag);
-                document.body.style.userSelect = ''; // Allow text selection again
+                document.body.style.userSelect = ''; 
             }
-
             document.addEventListener('mousemove', onMove);
             document.addEventListener('mouseup', stopDrag);
             document.addEventListener('touchmove', onMove);
             document.addEventListener('touchend', stopDrag);
         }
-
         handle.addEventListener('mousedown', startDrag);
         handle.addEventListener('touchstart', startDrag);
     });
@@ -39,18 +37,15 @@ document.addEventListener('loadComplete', (event) => {
     const draggableContainers = document.querySelectorAll('.draggable-container');
     draggableContainers.forEach(container => {
         container.addEventListener('mousedown', () => {
-            // Bring the clicked container to the front
             maxZIndex = Math.max(...Array.from(draggableContainers).map(c => parseInt(window.getComputedStyle(c).zIndex) || 1));
             container.style.zIndex = maxZIndex + 1;
         });
         container.addEventListener('touchstart', () => {
-            // Bring the touched container to the front
             maxZIndex = Math.max(...Array.from(draggableContainers).map(c => parseInt(window.getComputedStyle(c).zIndex) || 1));
             container.style.zIndex = maxZIndex + 1;
         });
     });
 
-    // Close window button
     const closeButtons = document.querySelectorAll('.closeWindow');
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {

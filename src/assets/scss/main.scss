@@ -1,105 +1,68 @@
-$windowW: 900px;
-$windowH: 600px;
-$h1Width : 100%;
-$setDisplay: block;
-$closeWindowBarHeight: 40px;
+$defaultWindowW: 900px;
+$defaultWindowH: 600px;
+$titleBarHeigth: 40px;
+
 .window{
     position: absolute;
     left: 5%;
     top: 5%;
-    width: $windowW;
-    height: $windowH;
+    width: $defaultWindowW;
+    height: $defaultWindowH;
     background-color: #9de9ae;
     border: gray solid 5px;
-    display: $setDisplay;
     box-shadow: 10px 10px 0px rgba(53, 53, 53, 0.3);
-}
-.draggable-handle{
-    cursor: grab;
-}
-.WindowTitle{
-    width: $h1Width;
-    font-size: 20px;
-    // color: rgba(0, 0, 0, 0.8);
-    // font-weight: bold;
-}
-.windowTitleBar{
-    font-weight: bold;
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom: gray solid 2px;
-    height: $closeWindowBarHeight;
-    .closeWindow{
-        cursor: pointer;
-    }
+    .windowTitleBar{
+        font-weight: bold;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: gray solid 2px;
+        height: $titleBarHeigth;
+        
+        .WindowTitle{
+            width: 100%;
+            font-size: 20px;
+        }
     
+        .closeWindow{
+            cursor: pointer;
+            background-color: #85ca94;
+            border-bottom: gray solid 2px;
+            transition: 0.1s;
+            position: absolute;
+            border-left: gray solid 2px;
+            width: fit-content;
+            padding: 10px;
+            right: 0;
+            top: 0;
+            text-decoration: none;
+            color: black;
+            height: $titleBarHeigth;
+            width: 40px;
+            height: 40px;
+            svg{
+                position:absolute;
+                top:50%;
+                bottom:50%;
+                transform:translate(-50%, -50%);
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .closeWindow:hover{
+            background-color: rgb(255, 109, 109);
+        }
+        .closeWindow:active{
+            background-color: rgb(131, 57, 57);
+        }
+    }
 }
+
 .draggable-container{
     position: absolute;
-}
-.closeWindow{
-    padding: 0;
-    background-color: #85ca94;
-    border-bottom: gray solid 2px;
-    transition: 0.1s;
-    position: absolute;
-    // justify-content: right;
-    border-left: gray solid 2px;
-    width: fit-content;
-    padding: 10px;
-    right: 0;
-    top: 0;
-    text-decoration: none;
-    color: black;
-    height: $closeWindowBarHeight;
-    width: 40px;
-    height: 40px;
-    svg{
-        position:absolute;
-        top:50%;
-        bottom:50%;
-        transform:translate(-50%, -50%);
-        width: 20px;
-        height: 20px;
+    .draggable-handle{
+        cursor: grab;
     }
 }
-.closeWindow:hover{
-    background-color: rgb(255, 109, 109);
-}
-.closeWindow:active{
-    background-color: rgb(131, 57, 57);
-}
 
-.domain>p{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-}
-.window::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: -10px;
-    width: 10px;
-    height: 10px;
-    background: 
-      repeating-linear-gradient(
-        45deg,
-        #00000033 0px,
-        #00000033 2px,
-        transparent 2px,
-        transparent 4px
-      ),
-      repeating-linear-gradient(
-        -45deg,
-        #00000033 0px,
-        #00000033 2px,
-        transparent 2px,
-        transparent 4px
-      );
-    box-shadow: 
-      2px 0 0 #00000033,
-      0 2px 0 #00000033;
-  }

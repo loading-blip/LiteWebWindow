@@ -1,18 +1,17 @@
 <script setup>
 import {defineAsyncComponent,getCurrentInstance, shallowRef} from 'vue';
-
-var taskList = getCurrentInstance().appContext.config.globalProperties.$taskList;
-
 import startIcon from './components/icons/IconMicrosofr.vue'
 import './assets/scss/taskbar.scss'
 
+var taskList = getCurrentInstance().appContext.config.globalProperties.$taskList;
+
 const components = import.meta.glob('./components/*.vue');
-// 处理任务列表生成组件数组
+// 异步注入组件
 const taskComponents = shallowRef([]);
+//This paragraph is about to be rewritten
+const componentPath = `./components/windowTemplate.vue`;
 
 Object.entries(taskList).forEach(([taskName, domain]) => {
-  const componentPath = `./components/windowTemplate.vue`;
-  
   if (components[componentPath]) {
     taskComponents.value.push({
       component: defineAsyncComponent(() => components[componentPath]()),
@@ -22,8 +21,11 @@ Object.entries(taskList).forEach(([taskName, domain]) => {
       }
     });
   }
+  else{
+    console.error('no such component');
+  }
 });
-console.log(taskComponents.value);
+//end paragraph
 </script>
 
 

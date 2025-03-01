@@ -1,7 +1,9 @@
+<!-- Template -->
 <script setup>
-import {onMounted,shallowRef,defineAsyncComponent, useTemplateRef} from 'vue';
+import {onMounted,shallowRef,defineAsyncComponent} from 'vue';
 import closeIcon from './icons/IconCloseWindow.vue'
 import '../assets/scss/main.scss'
+
 const props = defineProps({
     windowTitle: {
         type: String,
@@ -25,14 +27,17 @@ const props = defineProps({
     },
 })
 
+//import传入的参数对应组件
 const func_moudle = import.meta.glob('./windowDomain/*.vue');
 const taskfunc_moudle = shallowRef([]);
 taskfunc_moudle.value.push({
     component: defineAsyncComponent(() => func_moudle[`./windowDomain/${props.windowDomain}.vue`]()),
       props: {}});
+
 onMounted(() => {
+    //本来想在外置的js处理一些组件的事件，但是发现外置执行js所有uerySelectorAll都是undefined，所以只能在onMounted里面处理
     var maxZIndex = 0;
-    //window
+    //组件拖拽效果(兼容触控) (曾经做的项目移植过来的)
     const draggableHandles = document.querySelectorAll('.draggable-handle');
     draggableHandles.forEach(handle => {
         let currentContainer, offsetX, offsetY;
@@ -53,7 +58,7 @@ onMounted(() => {
                 document.removeEventListener('mouseup', stopDrag);
                 document.removeEventListener('touchmove', onMove);
                 document.removeEventListener('touchend', stopDrag);
-                document.body.style.userSelect = ''; // Allow text selection again
+                document.body.style.userSelect = '';
             }
 
             document.addEventListener('mousemove', onMove);
@@ -65,22 +70,20 @@ onMounted(() => {
         handle.addEventListener('mousedown', startDrag);
         handle.addEventListener('touchstart', startDrag);
     });
-
+    // 窗口拖拽或点击时前置窗口
     const draggableContainers = document.querySelectorAll('.draggable-container');
     draggableContainers.forEach(container => {
         container.addEventListener('mousedown', () => {
-            // Bring the clicked container to the front
             maxZIndex = Math.max(...Array.from(draggableContainers).map(c => parseInt(window.getComputedStyle(c).zIndex) || 1));
             container.style.zIndex = maxZIndex + 1;
         });
         container.addEventListener('touchstart', () => {
-            // Bring the touched container to the front
             maxZIndex = Math.max(...Array.from(draggableContainers).map(c => parseInt(window.getComputedStyle(c).zIndex) || 1));
             container.style.zIndex = maxZIndex + 1;
         });
     });
 
-    // Close window button
+    // 窗口右上角关闭按钮事件
     const closeButtons = document.querySelectorAll('.closeWindow');
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -92,6 +95,8 @@ onMounted(() => {
         });
     });
 
+
+    //处理传入的参数
     const windowBody = document.getElementById(props.windowTitle+'_Window');
     if (props.allowStretch) {
         windowBody.style.overflow = 'hidden';
