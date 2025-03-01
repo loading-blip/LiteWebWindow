@@ -2,7 +2,10 @@
 
 `ver 0.1`
 
-My first frontend program.
+
+A lightweight window simulation front-end.
+
+*Also my first frontend program.*
 
 Modify taskList var in main.js to add some new window (current usage method)
 
