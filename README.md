@@ -1,4 +1,4 @@
-# LiteWindow Program
+# LiteWebWindowProgram
 
 `ver 0.1`
 
