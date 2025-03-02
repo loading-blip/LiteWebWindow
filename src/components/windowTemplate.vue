@@ -2,7 +2,8 @@
 <script setup>
 import {onMounted,shallowRef,defineAsyncComponent} from 'vue';
 import closeIcon from './icons/IconCloseWindow.vue'
-import '../assets/scss/main.scss'
+import '../assets/scss/main.scss';
+import { RegCloseWindowButton,RegDraggableHandles} from '../assets/js/EventRegistrationTool/window.js';
 
 const props = defineProps({
     windowTitle: {
@@ -25,6 +26,26 @@ const props = defineProps({
         type: Boolean,
         default: true,
     },
+    minimized: {
+        type: Boolean,
+        default: true,
+    },
+    allowMinimized: {
+        type: Boolean,
+        default: true,
+    },
+    allowStretch: {
+        type: Boolean,
+        default: true,
+    },
+    allowClose: {
+        type: Boolean,
+        default: true,
+    },
+    allowDrag: {
+        type: Boolean,
+        default: true,
+    }
 })
 
 //import传入的参数对应组件
@@ -37,39 +58,12 @@ taskfunc_moudle.value.push({
 onMounted(() => {
     //本来想在外置的js处理一些组件的事件，但是发现外置执行js所有uerySelectorAll都是undefined，所以只能在onMounted里面处理
     var maxZIndex = 0;
-    //组件拖拽效果(兼容触控) (曾经做的项目移植过来的)
-    const draggableHandles = document.querySelectorAll('.draggable-handle');
-    draggableHandles.forEach(handle => {
-        let currentContainer, offsetX, offsetY;
-
-        function startDrag(e) {
-            currentContainer = handle.parentElement;
-            offsetX = (e.clientX || e.touches[0].clientX) - currentContainer.offsetLeft;
-            offsetY = (e.clientY || e.touches[0].clientY) - currentContainer.offsetTop;
-            document.body.style.userSelect = 'none'; // Prevent text selection
-
-            function onMove(e) {
-                currentContainer.style.left = `${(e.clientX || e.touches[0].clientX) - offsetX}px`;
-                currentContainer.style.top = `${(e.clientY || e.touches[0].clientY) - offsetY}px`;
-            }
-
-            function stopDrag() {
-                document.removeEventListener('mousemove', onMove);
-                document.removeEventListener('mouseup', stopDrag);
-                document.removeEventListener('touchmove', onMove);
-                document.removeEventListener('touchend', stopDrag);
-                document.body.style.userSelect = '';
-            }
-
-            document.addEventListener('mousemove', onMove);
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchmove', onMove);
-            document.addEventListener('touchend', stopDrag);
-        }
-
-        handle.addEventListener('mousedown', startDrag);
-        handle.addEventListener('touchstart', startDrag);
-    });
+    //组件拖拽效果(兼容触控)
+    if (props.allowDrag) {
+        const draggableHandles = document.getElementById(props.windowTitle+'_Window').querySelectorAll('.draggable-handle');
+        RegDraggableHandles(draggableHandles);
+    }
+    
     // 窗口拖拽或点击时前置窗口
     const draggableContainers = document.querySelectorAll('.draggable-container');
     draggableContainers.forEach(container => {
@@ -84,17 +78,10 @@ onMounted(() => {
     });
 
     // 窗口右上角关闭按钮事件
-    const closeButtons = document.querySelectorAll('.closeWindow');
-    closeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const container = button.parentElement.parentElement;
-            var taskListid = container.id.split('_')[0];
-            container.style.display = 'none';
-            document.getElementById(taskListid).classList.remove('pressedLabel');
-            document.getElementById(taskListid).classList.add('normalLabel');
-        });
-    });
-
+    if (props.allowClose) {
+        const closeButtons = document.getElementById(props.windowTitle+'_Window').querySelectorAll('.closeWindow');
+        RegCloseWindowButton(closeButtons);
+    }
 
     //处理传入的参数
     const windowBody = document.getElementById(props.windowTitle+'_Window');
@@ -104,6 +91,9 @@ onMounted(() => {
     }
     windowBody.style.width = props.windowWidth;
     windowBody.style.height = props.windowHeight;
+    if (props.minimized) {
+        windowBody.style.display = 'none';
+    }
     
 });
 
@@ -129,7 +119,5 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.window {
-    display: none;
-}
+
 </style>

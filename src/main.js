@@ -8,19 +8,26 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 
 const app = createApp(App)
 
-//此变量整改中
 var taskList = {
     "公告": {"window":"windowTemplate",
             "windowDomain": "noticeBoard",
             "sizeW": "900px",
             "sizeH": "600px",
-            "allowStretch": true},
+            "minimized": true,
+            "allowMinimized": true,
+            "allowStretch": true,
+            "allowClose": true,
+            "allowDrag": true},
 
     "task2": {"window":"windowTemplate",
                 "windowDomain": "example",
                 "sizeW": "400px",
                 "sizeH": "200px",
-                "allowStretch": false},
+                "minimized": true,
+                "allowMinimized": true,
+                "allowStretch": true,
+                "allowClose": true,
+                "allowDrag": true},
 };
 app.config.globalProperties.$taskList = taskList;
 
@@ -51,6 +58,21 @@ function addTask(taskName) {
 }
 //dom加载完后将taskList中的名称添加到taskBar中
 document.addEventListener('DOMContentLoaded', (event) => {
+    //开始菜单事件注册
+    let StartIcon = document.getElementById('StartIcon');
+    StartIcon.classList.add("normalLabel");
+    StartIcon.addEventListener('click', () => {
+        let StartMenu = document.getElementById('StartMenu');
+        if (StartMenu.style.display == 'none' || StartMenu.style.display == '') {
+            StartMenu.style.display = 'block';
+            StartIcon.classList.remove('normalLabel');
+            StartIcon.classList.add('pressedLabel');
+        } else {
+            StartMenu.style.display = 'none';
+            StartIcon.classList.remove('pressedLabel');
+            StartIcon.classList.add('normalLabel');
+        }
+    });
     for(const task in taskList) {
         addTask(task);
     }

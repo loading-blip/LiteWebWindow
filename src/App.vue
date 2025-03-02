@@ -1,7 +1,9 @@
 <script setup>
 import {defineAsyncComponent,getCurrentInstance, shallowRef} from 'vue';
 import startIcon from './components/icons/IconMicrosofr.vue'
+import StartMenu from './components/StartMenu.vue'
 import './assets/scss/taskbar.scss'
+
 
 var taskList = getCurrentInstance().appContext.config.globalProperties.$taskList;
 
@@ -22,6 +24,10 @@ Object.entries(taskList).forEach(([taskName, attr]) => {
         windowWidth: attr['sizeW'],
         windowHeight: attr['sizeH'],
         allowStretch: attr['allowStretch'],
+        allowMinimized: attr['allowMinimized'],
+        allowClose: attr['allowClose'],
+        allowDrag: attr['allowDrag'],
+        minimized: attr['minimized'],
       }
     });
   }
@@ -42,10 +48,15 @@ Object.entries(taskList).forEach(([taskName, attr]) => {
         :window-width="task.props.windowWidth"
         :window-height="task.props.windowHeight"
         :allow-stretch="task.props.allowStretch"
+        :allow-minimized="task.props.allowMinimized"
+        :allow-close="task.props.allowClose"
+        :allow-drag="task.props.allowDrag"
+        :minimized="task.props.minimized"
       />
+      <StartMenu/>
   <div id="taskBar">
       <ul>
-          <li><startIcon/></li>
+          <li id="StartIcon"><startIcon/></li>
       </ul>
   </div>
 </template>
