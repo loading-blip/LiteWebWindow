@@ -9,15 +9,19 @@ const components = import.meta.glob('./components/*.vue');
 // 异步注入组件
 const taskComponents = shallowRef([]);
 //This paragraph is about to be rewritten
-const componentPath = `./components/windowTemplate.vue`;
 
-Object.entries(taskList).forEach(([taskName, domain]) => {
+
+Object.entries(taskList).forEach(([taskName, attr]) => {
+  const componentPath = `./components/${attr['window']}.vue`;
   if (components[componentPath]) {
     taskComponents.value.push({
       component: defineAsyncComponent(() => components[componentPath]()),
       props: {
         windowTitle: taskName,
-        windowDomain: domain
+        windowDomain: attr['windowDomain'],
+        windowWidth: attr['sizeW'],
+        windowHeight: attr['sizeH'],
+        allowStretch: attr['allowStretch'],
       }
     });
   }
@@ -35,6 +39,9 @@ Object.entries(taskList).forEach(([taskName, domain]) => {
         :is="task.component"
         :window-title="task.props.windowTitle"
         :window-domain="task.props.windowDomain"
+        :window-width="task.props.windowWidth"
+        :window-height="task.props.windowHeight"
+        :allow-stretch="task.props.allowStretch"
       />
   <div id="taskBar">
       <ul>

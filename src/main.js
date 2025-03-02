@@ -10,8 +10,17 @@ const app = createApp(App)
 
 //此变量整改中
 var taskList = {
-    "公告": "noticeBoard",
-    "task2": "example",
+    "公告": {"window":"windowTemplate",
+            "windowDomain": "noticeBoard",
+            "sizeW": "900px",
+            "sizeH": "600px",
+            "allowStretch": true},
+
+    "task2": {"window":"windowTemplate",
+                "windowDomain": "example",
+                "sizeW": "400px",
+                "sizeH": "200px",
+                "allowStretch": false},
 };
 app.config.globalProperties.$taskList = taskList;
 
