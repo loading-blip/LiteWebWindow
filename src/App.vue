@@ -1,6 +1,6 @@
 <script setup>
 import {defineAsyncComponent,getCurrentInstance, shallowRef} from 'vue';
-import startIcon from './components/icons/IconMicrosofr.vue'
+import startIcon from './components/icons/IconMicrosoft.vue'
 import StartMenu from './components/StartMenu.vue'
 import './assets/scss/taskbar.scss'
 

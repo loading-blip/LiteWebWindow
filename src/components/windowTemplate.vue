@@ -2,8 +2,9 @@
 <script setup>
 import {onMounted,shallowRef,defineAsyncComponent} from 'vue';
 import closeIcon from './icons/IconCloseWindow.vue'
+import MinimizeIcon from './icons/IconMinimize.vue'
 import '../assets/scss/main.scss';
-import { RegCloseWindowButton,RegDraggableHandles} from '../assets/js/EventRegistrationTool/window.js';
+import { RegMinimizeWindowButton,RegDraggableHandles,RegCloseWindowButton} from '../assets/js/EventRegistrationTool/window.js';
 
 const props = defineProps({
     windowTitle: {
@@ -63,7 +64,7 @@ onMounted(() => {
         const draggableHandles = document.getElementById(props.windowTitle+'_Window').querySelectorAll('.draggable-handle');
         RegDraggableHandles(draggableHandles);
     }
-    
+
     // 窗口拖拽或点击时前置窗口
     const draggableContainers = document.querySelectorAll('.draggable-container');
     draggableContainers.forEach(container => {
@@ -77,7 +78,13 @@ onMounted(() => {
         });
     });
 
-    // 窗口右上角关闭按钮事件
+    // 窗口右上角最小化按钮事件
+    if (props.allowMinimized) {
+        const closeButtons = document.getElementById(props.windowTitle+'_Window').querySelectorAll('.MinimizeWindow');
+        RegMinimizeWindowButton(closeButtons);
+    }
+
+    //窗口右上角关闭按钮事件
     if (props.allowClose) {
         const closeButtons = document.getElementById(props.windowTitle+'_Window').querySelectorAll('.closeWindow');
         RegCloseWindowButton(closeButtons);
@@ -103,10 +110,12 @@ onMounted(() => {
     <div class="window draggable-container" :id="windowTitle+'_Window'">
         <div class="windowTitleBar draggable-handle">
             <h1 class="WindowTitle">{{ windowTitle }}</h1>
+
+            <a class="MinimizeWindow">
+                <MinimizeIcon/>
+            </a>
             <a class="closeWindow">
-                <template v-if="closeIcon">
-                    <closeIcon/>
-                </template>
+                <closeIcon/>
             </a>
         </div>
         <div class = "domain">

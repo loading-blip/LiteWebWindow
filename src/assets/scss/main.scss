@@ -24,7 +24,7 @@ $titleBarHeigth: 40px;
             font-size: 20px;
         }
     
-        .closeWindow{
+        .MinimizeWindow,.closeWindow{
             cursor: pointer;
             background-color: #85ca94;
             border-bottom: gray solid 2px;
@@ -48,6 +48,16 @@ $titleBarHeigth: 40px;
                 width: 20px;
                 height: 20px;
             }
+        }
+        .MinimizeWindow{
+            position: absolute;
+            right: 40px;
+        }
+        .MinimizeWindow:hover{
+            background-color: #75b382;
+        }
+        .MinimizeWindow:active{
+            background-color: #36533d;;
         }
         .closeWindow:hover{
             background-color: rgb(255, 109, 109);
