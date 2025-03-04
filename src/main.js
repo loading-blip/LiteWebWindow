@@ -28,6 +28,15 @@ var taskList = {
                 "allowStretch": true,
                 "allowClose": true,
                 "allowDrag": true},
+    "GenerateWindow": {"window":"windowTemplate",
+                "windowDomain": "GenMenu",
+                "sizeW": "900px",
+                "sizeH": "600px",
+                "minimized": true,
+                "allowMinimized": true,
+                "allowStretch": true,
+                "allowClose": true,
+                "allowDrag": true},
 };
 app.config.globalProperties.$taskList = taskList;
 

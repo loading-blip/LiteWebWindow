@@ -11,7 +11,7 @@
     <h1>User</h1>
     <div id="StartMenuList">
         <ul>
-            <li>GenMenu</li>
+            <li>Generate Window</li>
             <li>TaskManager</li>
         </ul>
     </div>    

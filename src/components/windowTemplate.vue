@@ -128,5 +128,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
+.domain{
+    padding: 20px;
+}
 </style>
