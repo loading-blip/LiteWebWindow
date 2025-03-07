@@ -53,6 +53,7 @@ Object.entries(taskList).forEach(([taskName, attr]) => {
         :allow-drag="task.props.allowDrag"
         :minimized="task.props.minimized"
       />
+      <div id="newWindowArea"></div>
       <StartMenu/>
   <div id="taskBar">
       <ul>

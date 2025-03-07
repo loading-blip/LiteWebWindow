@@ -1,3 +1,6 @@
+import { createApp,defineAsyncComponent} from "vue";
+
+
 /**
  * 注册窗口最小化按钮事件
  * @param {Object} MinimizeButtons - 最小化按钮
@@ -68,16 +71,17 @@ export function RegDraggableHandles(draggableHandles){
 /**
  * 添加任务栏标签
  * @param {string} taskName - 任务名称
+ * @param {boolean} defaultActiveState - 默认状态
  * @returns {void}
  */
-export function addToTaskBar(taskName) {    
+export function addToTaskBar(taskName,defaultActiveState=false) {    
     // taskName = taskName.replace(' ', '_');
     const taskBar = document.getElementById('taskBar').querySelector('ul');
     var task = document.createElement('li');
     task.innerHTML = `<a>${taskName}</a>`;
     task.id = taskName;
     //下次还是用jquery的toggleClass()吧
-    task.classList.add('taskList',"normalLabel");
+    task.classList.add('taskList',defaultActiveState?"pressedLabel":"normalLabel");
     task.addEventListener('click', () => {
         if (task.classList.contains('normalLabel')) {
             task.classList.remove('normalLabel');
@@ -91,3 +95,43 @@ export function addToTaskBar(taskName) {
     taskBar.appendChild(task);
 }
 
+/**
+ * 创建window组件
+ * @param {string} attr - 窗口属性
+ * @returns {void}
+ */
+export function GenerateWindow(attr){
+    const components = import.meta.glob('../../../components/*.vue');
+    const componentPath = `../../../components/${attr['TemplateName']}.vue`;
+    const windowArea = document.getElementById('newWindowArea');
+    if (components[componentPath]) {
+        const app = createApp(defineAsyncComponent(() => components[componentPath]()),{
+                    windowTitle: attr['WindowName'],  
+                    windowDomain: attr['DomainName'],
+                    windowWidth: attr['WindowWidth'],
+                    windowHeight: attr['WindowHeight'],
+                    allowStretch: attr['allowStretch'],
+                    minimized: attr['minimized'],
+                    allowMinimized: attr['allowMinimize'],
+                    allowClose: attr['allowClose'],
+                    allowDrag: attr['allowDrag']
+                    });
+        
+        const instance = app.mount(document.createElement('div'));
+        windowArea.appendChild(instance.$el);
+        // let translateAttr = {}
+        // translateAttr[attr['WindowName']] = {"window":attr["TemplateName"],
+        //                                             "windowDomain": attr['DomainName'],
+        //                                             "sizeW": attr['WindowWidth'],
+        //                                             "sizeH": attr['WindowHeight'],
+        //                                             "minimized": attr['minimized'],
+        //                                             "allowMinimized": attr['allowMinimize'],
+        //                                             "allowStretch": attr['allowStretch'],
+        //                                             "allowClose": attr['allowClose'],
+        //                                             "allowDrag": attr['allowDrag']
+        // }
+    }
+    else{
+        console.error(`no such component:${componentPath}`);
+    }
+}

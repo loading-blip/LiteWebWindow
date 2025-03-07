@@ -1,5 +1,44 @@
 <script>
+import { GenerateWindow,addToTaskBar } from '../../assets/js/EventRegistrationTool/window.js';
 
+
+
+export default {
+    methods: {
+        Generate(){
+            const genStateOutput = document.getElementById('genStateOutput');
+            const windowAttr = {
+            "WindowName":document.getElementById('WindowName').value,
+            "TemplateName":document.getElementById('TemplateName').value,
+            "DomainName":document.getElementById('DomainName').value,
+            "WindowWidth":document.getElementById('WindowWidth').value,
+            "WindowHeight":document.getElementById('WindowHeight').value,
+            "allowDrag":document.getElementById('allowDrag').checked,
+            "allowMinimize":document.getElementById('allowMinimize').checked,
+            "allowStretch":document.getElementById('allowStretch').checked,
+            "allowClose":document.getElementById('allowClose').checked,
+            "minimized":document.getElementById('minimized').checked
+            };
+            const allWindow = document.getElementsByClassName('window');
+            
+            let windowNameList = [];
+            for(let i=0;i<allWindow.length;i++){
+                console.log(allWindow[i]);
+                windowNameList.push(allWindow[i].id.split('_')[0]);
+            }
+            windowNameList.forEach(element => {
+                if (element === windowAttr['WindowName']){
+                    genStateOutput.innerHTML='<p style="color:red">窗口已存在</p>'
+                    return
+                }
+            });
+            genStateOutput.innerHTML('')
+            GenerateWindow(windowAttr);
+            addToTaskBar(windowAttr['WindowName'],(!windowAttr["minimized"]));
+        }
+        
+    }
+}
 </script>
 
 
@@ -11,7 +50,7 @@
                     <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="GenerateButton" id="WindowName">
                     <input type="text" class="form-control" placeholder="Template" aria-label="Template" aria-describedby="GenerateButton" id="TemplateName">
                     <input type="text" class="form-control" placeholder="Domain" aria-label="Domain" aria-describedby="GenerateButton" id="DomainName">
-                    <button class="btn btn-outline-secondary" type="button" id="GenerateButton">Generate!</button>
+                    <button class="btn btn-outline-secondary" type="button" id="GenerateButton" @click="Generate()">Generate!</button>
                 </div>
             </div>
         <div class="settingLabel"><h2>Advance</h2></div>
@@ -31,7 +70,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="alowMinimize">
+                        <input class="form-check-input" type="checkbox" value="" id="allowMinimize">
                         <label class="form-check-label" for="flexCheckDefault">
                             Minimize
                         </label>
@@ -58,6 +97,7 @@
                 </div>
             </div>
         </div>
+        <div id="genStateOutput"></div>
     </div>
 </template>
 
@@ -147,5 +187,8 @@ input[type="checkbox"]:checked{
 }
 .input-group-text{
     background-color: rgb(150, 149, 149);
+}
+#genStateOutput{
+    margin: 0 auto;
 }
 </style>

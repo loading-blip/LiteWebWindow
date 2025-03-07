@@ -1,5 +1,27 @@
 <script>
+import { GenerateWindow,addToTaskBar } from '../assets/js/EventRegistrationTool/window.js';
+export default {
+    methods: {
+        windowGenerater(){
+            const windowAttr = {
+                "WindowName":"GenerateWindow",
+                "TemplateName":"windowTemplate",
+                "DomainName":"GenMenu",
+                "WindowWidth":"900px",
+                "WindowHeight":"600px",
+                "allowDrag":true,
+                "allowMinimize":true,
+                "allowStretch":true,
+                "allowClose":true,
+                "minimized":false
+            };
+            GenerateWindow(windowAttr);
+            addToTaskBar(windowAttr['WindowName'],(!windowAttr["minimized"]));
 
+        }
+        
+    }
+}
 </script>
 
 
@@ -11,7 +33,7 @@
     <h1>User</h1>
     <div id="StartMenuList">
         <ul>
-            <li>Generate Window</li>
+            <li @click="windowGenerater()">Generate Window</li>
             <li>TaskManager</li>
         </ul>
     </div>    
