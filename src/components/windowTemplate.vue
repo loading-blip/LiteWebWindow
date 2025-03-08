@@ -53,13 +53,12 @@ const props = defineProps({
 const func_moudle = import.meta.glob('./windowDomain/*.vue');
 const taskfunc_moudle = shallowRef([]);
 taskfunc_moudle.value.push({
-    component: defineAsyncComponent(() => func_moudle[`./windowDomain/${props.windowDomain}.vue`]()),
-      props: {}});
+    component: defineAsyncComponent(() => func_moudle[`./windowDomain/${props.windowDomain}.vue`]())});
 
 onMounted(() => {
-    //本来想在外置的js处理一些组件的事件，但是发现外置执行js所有uerySelectorAll都是undefined，所以只能在onMounted里面处理
     var maxZIndex = 0;
     //组件拖拽效果(兼容触控)
+    console.log(props);
     if (props.allowDrag) {
         const draggableHandles = document.getElementById(props.windowTitle+'_Window').querySelectorAll('.draggable-handle');
         RegDraggableHandles(draggableHandles);

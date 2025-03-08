@@ -1,23 +1,37 @@
 <script>
 import { GenerateWindow,addToTaskBar } from '../assets/js/EventRegistrationTool/window.js';
+import $ from 'jquery'
 export default {
     methods: {
         windowGenerater(){
+            $('#StartMenu').hide();
+            const allWindow = document.getElementsByClassName('window');
+            //之后样式会改为随对应窗口display主动改变
+            $('#StartIcon').toggleClass('normalLabel pressedLabel');
+            let windowNameList = [];
+            for(let i=0;i<allWindow.length;i++){
+                console.log(allWindow[i]);
+                windowNameList.push(allWindow[i].id.split('_')[0]);
+            }
+            const isWindowExist = windowNameList.some(element => element === 'GenerateWindow');
+            if (isWindowExist) {
+                console.log($('#GenerateWindow_window').css('z-index'));
+                return;
+            }
             const windowAttr = {
-                "WindowName":"GenerateWindow",
-                "TemplateName":"windowTemplate",
-                "DomainName":"GenMenu",
-                "WindowWidth":"900px",
-                "WindowHeight":"600px",
-                "allowDrag":true,
-                "allowMinimize":true,
-                "allowStretch":true,
-                "allowClose":true,
-                "minimized":false
-            };
+                    "WindowName":"GenerateWindow",
+                    "TemplateName":"windowTemplate",
+                    "DomainName":"GenMenu",
+                    "WindowWidth":"900px",
+                    "WindowHeight":"600px",
+                    "allowDrag":true,
+                    "allowMinimize":true,
+                    "allowStretch":true,
+                    "allowClose":true,
+                    "minimized":false
+                };
             GenerateWindow(windowAttr);
             addToTaskBar(windowAttr['WindowName'],(!windowAttr["minimized"]));
-
         }
         
     }

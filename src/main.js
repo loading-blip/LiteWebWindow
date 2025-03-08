@@ -4,7 +4,7 @@ import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import { addToTaskBar } from './assets/js/EventRegistrationTool/window.js'
-
+import $ from 'jquery'
 
 const app = createApp(App)
 
@@ -35,19 +35,14 @@ app.config.globalProperties.$taskList = taskList;
 //dom加载完后将taskList中的名称添加到taskBar中
 document.addEventListener('DOMContentLoaded', (event) => {
     //开始菜单事件注册
-    let StartIcon = document.getElementById('StartIcon');
-    StartIcon.classList.add("normalLabel");
-    StartIcon.addEventListener('click', () => {
-        let StartMenu = document.getElementById('StartMenu');
-        if (StartMenu.style.display == 'none' || StartMenu.style.display == '') {
-            StartMenu.style.display = 'block';
-            StartIcon.classList.remove('normalLabel');
-            StartIcon.classList.add('pressedLabel');
+    $('#StartIcon').addClass("normalLabel");
+    $('#StartIcon').on('click', () => {
+        if ($('#StartMenu').css('display') === 'none' || $('#StartMenu').css('display') === '') {
+            $('#StartMenu').show();
         } else {
-            StartMenu.style.display = 'none';
-            StartIcon.classList.remove('pressedLabel');
-            StartIcon.classList.add('normalLabel');
+            $('#StartMenu').hide();
         }
+        $('#StartIcon').toggleClass('normalLabel pressedLabel');
     });
     //初始窗口注册
     for(const task in taskList) {

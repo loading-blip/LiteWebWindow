@@ -2,7 +2,6 @@
 import { GenerateWindow,addToTaskBar } from '../../assets/js/EventRegistrationTool/window.js';
 
 
-
 export default {
     methods: {
         Generate(){
@@ -26,13 +25,12 @@ export default {
                 console.log(allWindow[i]);
                 windowNameList.push(allWindow[i].id.split('_')[0]);
             }
-            windowNameList.forEach(element => {
-                if (element === windowAttr['WindowName']){
-                    genStateOutput.innerHTML='<p style="color:red">窗口已存在</p>'
-                    return
-                }
-            });
-            genStateOutput.innerHTML('')
+            const isWindowExist = windowNameList.some(element => element === windowAttr['WindowName']);
+            if (isWindowExist){
+                genStateOutput.innerHTML='<p style="color:red">窗口已存在</p>';
+                return;
+            }
+            genStateOutput.innerHTML='';
             GenerateWindow(windowAttr);
             addToTaskBar(windowAttr['WindowName'],(!windowAttr["minimized"]));
         }
@@ -64,25 +62,25 @@ export default {
                 <h3>Allow:</h3>
                 <div class="SelectArea">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="allowDrag">
+                        <input class="form-check-input" type="checkbox" value="" id="allowDrag" checked>
                         <label class="form-check-label" for="flexCheckDefault">
                             Drag
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="allowMinimize">
+                        <input class="form-check-input" type="checkbox" value="" id="allowMinimize" checked>
                         <label class="form-check-label" for="flexCheckDefault">
                             Minimize
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="allowStretch">
+                        <input class="form-check-input" type="checkbox" value="" id="allowStretch" checked>
                         <label class="form-check-label" for="flexCheckDefault">
                             Stretch
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="allowClose">
+                        <input class="form-check-input" type="checkbox" value="" id="allowClose" checked>
                         <label class="form-check-label" for="flexCheckDefault">
                             Closed
                         </label>

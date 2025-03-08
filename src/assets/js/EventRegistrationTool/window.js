@@ -1,5 +1,5 @@
 import { createApp,defineAsyncComponent} from "vue";
-
+import $ from 'jquery'
 
 /**
  * 注册窗口最小化按钮事件
@@ -74,25 +74,20 @@ export function RegDraggableHandles(draggableHandles){
  * @param {boolean} defaultActiveState - 默认状态
  * @returns {void}
  */
-export function addToTaskBar(taskName,defaultActiveState=false) {    
-    // taskName = taskName.replace(' ', '_');
-    const taskBar = document.getElementById('taskBar').querySelector('ul');
-    var task = document.createElement('li');
-    task.innerHTML = `<a>${taskName}</a>`;
-    task.id = taskName;
-    //下次还是用jquery的toggleClass()吧
-    task.classList.add('taskList',defaultActiveState?"pressedLabel":"normalLabel");
-    task.addEventListener('click', () => {
-        if (task.classList.contains('normalLabel')) {
-            task.classList.remove('normalLabel');
-            task.classList.add('pressedLabel');
-            document.getElementById(taskName+'_Window').style.display = 'block';
+export function addToTaskBar(taskName,defaultActiveState=false) {
+    var task = $('<li>',{
+        id:taskName,
+        class:`${'taskList'} ${defaultActiveState?"pressedLabel":"normalLabel"}`
+    }).on('click', () => {
+        if (task.hasClass('normalLabel')) {
+            $(`#${taskName}_Window`).show();
         } else {
-            task.classList.add('normalLabel');
-            document.getElementById(taskName+'_Window').style.display = 'none';
+            $(`#${taskName}_Window`).hide();
         }
+        task.toggleClass('normalLabel pressedLabel');
     });
-    taskBar.appendChild(task);
+    task.append($('<a>').text(taskName));
+    $('#taskBar>ul').append(task);
 }
 
 /**
@@ -103,7 +98,6 @@ export function addToTaskBar(taskName,defaultActiveState=false) {
 export function GenerateWindow(attr){
     const components = import.meta.glob('../../../components/*.vue');
     const componentPath = `../../../components/${attr['TemplateName']}.vue`;
-    const windowArea = document.getElementById('newWindowArea');
     if (components[componentPath]) {
         const app = createApp(defineAsyncComponent(() => components[componentPath]()),{
                     windowTitle: attr['WindowName'],  
@@ -118,7 +112,7 @@ export function GenerateWindow(attr){
                     });
         
         const instance = app.mount(document.createElement('div'));
-        windowArea.appendChild(instance.$el);
+        $('#newWindowArea').append(instance.$el);
         // let translateAttr = {}
         // translateAttr[attr['WindowName']] = {"window":attr["TemplateName"],
         //                                             "windowDomain": attr['DomainName'],
