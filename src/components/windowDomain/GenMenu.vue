@@ -150,6 +150,7 @@ h3{
     border: 0;
     color: white;
     box-shadow: 5px 5px 0 gray;
+    text-align: center;
 }
 .form-control::-webkit-input-placeholder{
     color: white;

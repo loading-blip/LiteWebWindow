@@ -88,6 +88,10 @@ onMounted(() => {
         const closeButtons = document.getElementById(props.windowTitle+'_Window').querySelectorAll('.closeWindow');
         RegCloseWindowButton(closeButtons);
     }
+    else{
+        //修改关闭按钮样式
+        document.getElementById(props.windowTitle+'_Window').querySelectorAll('.closeWindow')[0].classList.replace('closeWindow','disableCloseWindow')
+    }
 
     //处理传入的参数
     const windowBody = document.getElementById(props.windowTitle+'_Window');

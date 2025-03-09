@@ -24,7 +24,7 @@ $titleBarHeigth: 40px;
             font-size: 20px;
         }
     
-        .MinimizeWindow,.closeWindow{
+        .MinimizeWindow,.closeWindow,.disableCloseWindow{
             cursor: pointer;
             background-color: #85ca94;
             border-bottom: gray solid 2px;
@@ -64,6 +64,12 @@ $titleBarHeigth: 40px;
         }
         .closeWindow:active{
             background-color: rgb(131, 57, 57);
+        }
+        .disableCloseWindow:hover{
+            background-color: rgb(206, 172, 172);
+        }
+        .disableCloseWindow{
+            background-color: rgb(165, 157, 157);
         }
     }
 }
