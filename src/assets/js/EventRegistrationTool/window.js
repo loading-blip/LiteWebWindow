@@ -108,7 +108,8 @@ export function GenerateWindow(attr){
                     minimized: attr['minimized'],
                     allowMinimized: attr['allowMinimize'],
                     allowClose: attr['allowClose'],
-                    allowDrag: attr['allowDrag']
+                    allowDrag: attr['allowDrag'],
+                    data:attr['data']
                     });
         
         const instance = app.mount(document.createElement('div'));

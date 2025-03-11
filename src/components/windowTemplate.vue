@@ -46,6 +46,11 @@ const props = defineProps({
     allowDrag: {
         type: Boolean,
         default: true,
+    },
+    data: {
+        type: null,
+        default: '',
+        required: false
     }
 })
 
@@ -53,12 +58,11 @@ const props = defineProps({
 const func_moudle = import.meta.glob('./windowDomain/*.vue');
 const taskfunc_moudle = shallowRef([]);
 taskfunc_moudle.value.push({
-    component: defineAsyncComponent(() => func_moudle[`./windowDomain/${props.windowDomain}.vue`]())});
+    component: defineAsyncComponent(() => func_moudle[`./windowDomain/${props.windowDomain}.vue`]()),props:{data:props.data}});
 
 onMounted(() => {
     var maxZIndex = 0;
     //组件拖拽效果(兼容触控)
-    console.log(props);
     if (props.allowDrag) {
         const draggableHandles = document.getElementById(props.windowTitle+'_Window').querySelectorAll('.draggable-handle');
         RegDraggableHandles(draggableHandles);
@@ -76,6 +80,7 @@ onMounted(() => {
             container.style.zIndex = maxZIndex + 1;
         });
     });
+    
 
     // 窗口右上角最小化按钮事件
     if (props.allowMinimized) {
@@ -124,7 +129,8 @@ onMounted(() => {
         <div class = "domain">
             <component v-for="(task, index) in taskfunc_moudle" :key="index+2"
             :is="task.component"
-            v-bind="task.props"     
+            v-bind="task.props"
+            :data="task.props.data"
         />
         </div>
     </div>

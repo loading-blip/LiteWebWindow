@@ -10,12 +10,10 @@ export default {
             $('#StartIcon').toggleClass('normalLabel pressedLabel');
             let windowNameList = [];
             for(let i=0;i<allWindow.length;i++){
-                console.log(allWindow[i]);
                 windowNameList.push(allWindow[i].id.split('_')[0]);
             }
             const isWindowExist = windowNameList.some(element => element === 'GenerateWindow');
             if (isWindowExist) {
-                console.log($('#GenerateWindow_window').css('z-index'));
                 return;
             }
             const windowAttr = {
@@ -28,7 +26,8 @@ export default {
                     "allowMinimize":true,
                     "allowStretch":true,
                     "allowClose":true,
-                    "minimized":false
+                    "minimized":false,
+                    'data':null
                 };
             GenerateWindow(windowAttr);
             addToTaskBar(windowAttr['WindowName'],(!windowAttr["minimized"]));

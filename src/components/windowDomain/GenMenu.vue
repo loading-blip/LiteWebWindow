@@ -1,6 +1,13 @@
+<script setup>
+    import { GenerateWindow,addToTaskBar } from '../../assets/js/EventRegistrationTool/window.js';
+    const props = defineProps({
+        data: {
+            type: null,
+            default: ''
+        }
+    });
+</script>
 <script>
-import { GenerateWindow,addToTaskBar } from '../../assets/js/EventRegistrationTool/window.js';
-
 
 export default {
     methods: {
@@ -16,13 +23,13 @@ export default {
             "allowMinimize":document.getElementById('allowMinimize').checked,
             "allowStretch":document.getElementById('allowStretch').checked,
             "allowClose":document.getElementById('allowClose').checked,
-            "minimized":document.getElementById('minimized').checked
+            "minimized":document.getElementById('minimized').checked,
+            "data":null
             };
             const allWindow = document.getElementsByClassName('window');
             
             let windowNameList = [];
             for(let i=0;i<allWindow.length;i++){
-                console.log(allWindow[i]);
                 windowNameList.push(allWindow[i].id.split('_')[0]);
             }
             const isWindowExist = windowNameList.some(element => element === windowAttr['WindowName']);
@@ -101,93 +108,5 @@ export default {
 
 
 <style scoped lang="scss">
-.settingLabel{
-    padding: 5px;
-    border-bottom: 1px dotted darkgray;
-    margin-bottom: 20px;
-    h2::before{
-        content: ' ';
-        width: 15px;
-        height: 80%;
-        border-left: 5px solid #2ca0f8;
-        margin-right: 10px;
-        border-radius: 2px;
-    }
-    h2{
-        $h2height:40px;
-        height: $h2height;
-        line-height: $h2height;
-        font-size: 1.5rem;
-    }
-}
-h3{
-    font-size: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    float: left;
-}
-.input-group{
-    margin-bottom: 20px;
-}
-.SelectArea{
-    float: left;
-    display: flex;
-    flex-direction: row;
-    width: 50%;
-}
-.form-check{
-    margin-left: 20px;
-}
-#mini{
-    width: 100px;
-    margin: 0 auto;
-    margin-top: 100px;
-}
-.input-group-text,.form-control,.btn{
-    background-color: darkgray;
-    border-radius: 0;
-    border: 0;
-    color: white;
-    box-shadow: 5px 5px 0 gray;
-    text-align: center;
-}
-.form-control::-webkit-input-placeholder{
-    color: white;
-    text-align: center;
 
-}
-.input-group-text,.form-control{
-    border-right: 4px solid rgb(223, 223, 223);
-}
-.form-control:last-child{
-    border: 0;
-}
-
-input[type="checkbox"]{
-    border-radius: 0;
-    border: 0;
-    background-color: darkgray;
-}
-input[type="checkbox"]:focus{
-    box-shadow: none;
-}
-input[type="checkbox"]:checked{
-    background-color: gray;
-}
-.form-control:active{
-    box-shadow: 5px 0px 0 gray;
-}
-.form-control:focus{
-    z-index: 0;
-}
-#GenerateButton{
-    background-color: rgb(42, 190, 79);
-}
-.input-group-text{
-    background-color: rgb(150, 149, 149);
-}
-#genStateOutput{
-    margin: 0 auto;
-}
 </style>

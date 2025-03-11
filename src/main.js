@@ -11,13 +11,14 @@ const app = createApp(App)
 var taskList = {
     "公告": {"window":"windowTemplate",
             "windowDomain": "noticeBoard",
-            "sizeW": "900px",
-            "sizeH": "600px",
-            "minimized": true,
+            "sizeW": "500px",
+            "sizeH": "500px",
+            "minimized": false,
             "allowMinimized": true,
             "allowStretch": true,
             "allowClose": true,
-            "allowDrag": true},
+            "allowDrag": true,
+            "data":''},
 
     "task2": {"window":"windowTemplate",
                 "windowDomain": "example",
@@ -27,7 +28,19 @@ var taskList = {
                 "allowMinimized": true,
                 "allowStretch": true,
                 "allowClose": true,
-                "allowDrag": true},
+                "allowDrag": true,
+                "data":''},
+
+    "快递查询": {"window":"windowTemplate",
+                "windowDomain": "expressQuery",
+                "sizeW": "500px",
+                "sizeH": "200px",
+                "minimized": true,
+                "allowMinimized": true,
+                "allowStretch": true,
+                "allowClose": true,
+                "allowDrag": true,
+                "data":''},
 };
 app.config.globalProperties.$taskList = taskList;
 
@@ -45,8 +58,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         $('#StartIcon').toggleClass('normalLabel pressedLabel');
     });
     //初始窗口注册
-    for(const task in taskList) {
-        addToTaskBar(task);
+    for(let task in taskList) {
+        addToTaskBar(task,!taskList[task]['minimized']);
     }
 });
 

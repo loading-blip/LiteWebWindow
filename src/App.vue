@@ -28,6 +28,7 @@ Object.entries(taskList).forEach(([taskName, attr]) => {
         allowClose: attr['allowClose'],
         allowDrag: attr['allowDrag'],
         minimized: attr['minimized'],
+        data:attr['data']
       }
     });
   }
@@ -52,6 +53,7 @@ Object.entries(taskList).forEach(([taskName, attr]) => {
         :allow-close="task.props.allowClose"
         :allow-drag="task.props.allowDrag"
         :minimized="task.props.minimized"
+        :data="task.props.data"
       />
       <div id="newWindowArea"></div>
       <StartMenu/>
