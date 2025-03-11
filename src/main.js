@@ -29,18 +29,7 @@ var taskList = {
                 "allowStretch": true,
                 "allowClose": true,
                 "allowDrag": true,
-                "data":''},
-
-    "快递查询": {"window":"windowTemplate",
-                "windowDomain": "expressQuery",
-                "sizeW": "500px",
-                "sizeH": "200px",
-                "minimized": true,
-                "allowMinimized": true,
-                "allowStretch": true,
-                "allowClose": true,
-                "allowDrag": true,
-                "data":''},
+                "data":''}
 };
 
 

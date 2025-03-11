@@ -1,7 +1,6 @@
 <script setup>
     import { GenerateWindow,addToTaskBar} from '../../assets/js/EventRegistrationTool/window.js'
     import inputFilter from '../function/selectFilter.vue'
-    import {getCurrentInstance, onMounted} from 'vue'
 
     const props = defineProps({
         data: {

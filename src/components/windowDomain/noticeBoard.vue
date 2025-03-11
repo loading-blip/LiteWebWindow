@@ -7,14 +7,11 @@ const props = defineProps({
 });
 </script>
 <template>
-    <h2>须知</h2>
-    <h3>推荐使用大屏</h3>
-    <p>窗口可拖动/拉伸/最小化，目前项目为半成品</p>
-    <p>点击任务栏中快递查询即可</p>
-    <p>名称填写qq号</p>
-    <p>后四位填写快递运单中的手机号后四位</p>
+    <h2>NoticeBoard</h2>
+    <h3>A sample Window</h3>
+    <p>You can Close/Minimize/TopUp/Control window now!</p>
     
-    <p id ="myLink" ><a href="https://github.com/loading-blip/LiteWebWindow" target="_blank">项目开源地址</a></p>
+    <p id ="myLink" ><a href="https://github.com/loading-blip/LiteWebWindow" target="_blank">GitHub</a></p>
 </template>
 
 <style scoped lang="scss">

@@ -24,8 +24,7 @@ Modify taskList var in main.js to add some new window (current usage method)
 
 ## Project Preview
 
-![img](img/v0.2.1.2-main.png "Preview")
-![img](img/v0.2.1.2.png "Generate Window Preview")
+![gif](img/Action-v0.2.3.gif "Preview")
 
 This project uses [Vue](https://github.com/vuejs/core "official github website") framwork , [Bootstrap v5](https://github.com/twbs/bootstrap "official github website"), jQuery
 
