@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import { addToTaskBar } from './assets/js/EventRegistrationTool/window.js'
 import $ from 'jquery'
 
-const app = createApp(App)
+
 
 var taskList = {
     "公告": {"window":"windowTemplate",
@@ -42,7 +42,7 @@ var taskList = {
                 "allowDrag": true,
                 "data":''},
 };
-app.config.globalProperties.$taskList = taskList;
+
 
 
 //dom加载完后将taskList中的名称添加到taskBar中
@@ -63,4 +63,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
+const app = createApp(App)
+app.config.globalProperties.$taskList = taskList;
 app.mount('#app')

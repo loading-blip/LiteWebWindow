@@ -1,11 +1,26 @@
 <script setup>
-    import { GenerateWindow,addToTaskBar } from '../../assets/js/EventRegistrationTool/window.js';
+    import { GenerateWindow,addToTaskBar} from '../../assets/js/EventRegistrationTool/window.js'
+    import inputFilter from '../function/selectFilter.vue'
+    import {getCurrentInstance, onMounted} from 'vue'
+
     const props = defineProps({
         data: {
             type: null,
             default: ''
         }
     });
+    //遍历有哪些模板
+    const Window = import.meta.glob('../*');
+    var windowTemplate = [];
+    var windowDomain =[];
+    for (const path in Window) {
+        windowTemplate.push(path.substring(path.lastIndexOf('/')+1).slice(0,-4));
+    }
+    const Domain = import.meta.glob('./*');
+    for (const path in Domain) {
+        windowDomain.push(path.substring(path.lastIndexOf('/')+1).slice(0,-4));
+    }
+
 </script>
 <script>
 
@@ -53,8 +68,18 @@ export default {
             <div>
                 <div class="input-group mb-4">
                     <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="GenerateButton" id="WindowName">
-                    <input type="text" class="form-control" placeholder="Template" aria-label="Template" aria-describedby="GenerateButton" id="TemplateName">
-                    <input type="text" class="form-control" placeholder="Domain" aria-label="Domain" aria-describedby="GenerateButton" id="DomainName">
+                    <inputFilter
+                        :options="windowTemplate"
+                        :placeholder="'Template'"
+                        :id="'TemplateName'"
+                    />
+                    <inputFilter
+                        :options="windowDomain"
+                        :placeholder="'Domain'"
+                        :id="'DomainName'"
+                    />
+                    <!-- <input type="text" class="form-control" placeholder="Template" aria-label="Template" aria-describedby="GenerateButton" id="TemplateName">
+                    <input type="text" class="form-control" placeholder="Domain" aria-label="Domain" aria-describedby="GenerateButton" id="DomainName"> -->
                     <button class="btn btn-outline-secondary" type="button" id="GenerateButton" @click="Generate()">Generate!</button>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 # LiteWebWindow Project
 
-`ver 0.2.2.1`
+`ver 0.2.3`
 
 A lightweight window simulation front-end.
 
