@@ -1,7 +1,7 @@
 <script setup>
-    import { GenerateWindow,addToTaskBar,allWindowNameList} from '../../assets/js/EventRegistrationTool/window.js'
+    import { GenerateWindow,addToTaskBar} from '../../assets/js/EventRegistrationTool/window.js'
     import inputFilter from '../function/selectFilter.vue'
-    import $ from 'jquery'
+    import {getCurrentInstance, onMounted} from 'vue'
 
     const props = defineProps({
         data: {
@@ -20,35 +20,39 @@
     for (const path in Domain) {
         windowDomain.push(path.substring(path.lastIndexOf('/')+1).slice(0,-4));
     }
-    //剔除startmenu
-    console.log(windowTemplate.indexOf('StartMenu'))
-    console.log(windowTemplate.splice(windowTemplate.indexOf('StartMenu')))
-    windowTemplate.splice(windowTemplate.indexOf('StartMenu'),windowTemplate.indexOf('StartMenu'));
+
 </script>
 <script>
 
 export default {
     methods: {
         Generate(){
+            const genStateOutput = document.getElementById('genStateOutput');
             const windowAttr = {
-            "WindowName":$('#WindowName').val(),
-            "TemplateName":$('#TemplateName').val(),
-            "DomainName":$('#DomainName').val(),
-            "WindowWidth":$('#WindowWidth').val(),
-            "WindowHeight":$('#WindowHeight').val(),
-            "allowDrag":$('#allowDrag').is (":checked"),
-            "allowMinimize":$('#allowMinimize').is (":checked"),
-            "allowStretch":$('#allowStretch').is (":checked"),
-            "allowClose":$('#allowClose').is (":checked"),
-            "minimized":$('#minimized').is (":checked"),
+            "WindowName":document.getElementById('WindowName').value,
+            "TemplateName":document.getElementById('TemplateName').value,
+            "DomainName":document.getElementById('DomainName').value,
+            "WindowWidth":document.getElementById('WindowWidth').value,
+            "WindowHeight":document.getElementById('WindowHeight').value,
+            "allowDrag":document.getElementById('allowDrag').checked,
+            "allowMinimize":document.getElementById('allowMinimize').checked,
+            "allowStretch":document.getElementById('allowStretch').checked,
+            "allowClose":document.getElementById('allowClose').checked,
+            "minimized":document.getElementById('minimized').checked,
             "data":null
             };
-            const isWindowExist = allWindowNameList().some(element => element === windowAttr['WindowName']);
+            const allWindow = document.getElementsByClassName('window');
+            
+            let windowNameList = [];
+            for(let i=0;i<allWindow.length;i++){
+                windowNameList.push(allWindow[i].id.split('_')[0]);
+            }
+            const isWindowExist = windowNameList.some(element => element === windowAttr['WindowName']);
             if (isWindowExist){
-                $('#genStateOutput').html('<p style="color:red">窗口已存在</p>');
+                genStateOutput.innerHTML='<p style="color:red">窗口已存在</p>';
                 return;
             }
-            $('#genStateOutput').html('');
+            genStateOutput.innerHTML='';
             GenerateWindow(windowAttr);
             addToTaskBar(windowAttr['WindowName'],(!windowAttr["minimized"]));
         }
@@ -74,6 +78,8 @@ export default {
                         :placeholder="'Domain'"
                         :id="'DomainName'"
                     />
+                    <!-- <input type="text" class="form-control" placeholder="Template" aria-label="Template" aria-describedby="GenerateButton" id="TemplateName">
+                    <input type="text" class="form-control" placeholder="Domain" aria-label="Domain" aria-describedby="GenerateButton" id="DomainName"> -->
                     <button class="btn btn-outline-secondary" type="button" id="GenerateButton" @click="Generate()">Generate!</button>
                 </div>
             </div>

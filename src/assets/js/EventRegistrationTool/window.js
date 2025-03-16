@@ -3,7 +3,7 @@ import $ from 'jquery'
 
 /**
  * 注册窗口最小化按钮事件
- * @param {HTMLElement} MinimizeButtons - 最小化按钮
+ * @param {Object} MinimizeButtons - 最小化按钮
  */
 export function RegMinimizeWindowButton(MinimizeButtons){
     MinimizeButtons.forEach(button => {
@@ -18,7 +18,7 @@ export function RegMinimizeWindowButton(MinimizeButtons){
 }
 /**
  * 注册窗口关闭按钮事件
- * @param {HTMLElement} closeButtons - 最小化按钮
+ * @param {Object} closeButtons - 最小化按钮
  */
 export function RegCloseWindowButton(closeButtons){
     closeButtons.forEach(button => {
@@ -32,7 +32,7 @@ export function RegCloseWindowButton(closeButtons){
 }
 /**
  * 注册窗口拖拽事件
- * @param {HTMLElement} draggableHandles - 拖拽手柄
+ * @param {Object} draggableHandles - 拖拽手柄
  */
 export function RegDraggableHandles(draggableHandles){
     draggableHandles.forEach(handle => {
@@ -129,16 +129,4 @@ export function GenerateWindow(attr){
     else{
         console.error(`no such component:${componentPath}`);
     }
-}
-/**
- * 返回所有窗口名称
- * @returns {Array<string>}
- */
-export function allWindowNameList(){
-    const allWindow = document.getElementsByClassName('window');     
-    let windowNameList = [];
-    for(let i=0;i<allWindow.length;i++){
-        windowNameList.push(allWindow[i].id.split('_')[0]);
-    }
-    return windowNameList;
 }
