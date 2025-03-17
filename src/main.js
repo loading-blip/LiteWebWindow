@@ -29,7 +29,17 @@ var taskList = {
                 "allowStretch": true,
                 "allowClose": true,
                 "allowDrag": true,
-                "data":''}
+                "data":''},
+    "voting": {"window":"windowTemplate",
+                "windowDomain": "voting",
+                "sizeW": "500px",
+                "sizeH": "500px",
+                "minimized": false,
+                "allowMinimized": true,
+                "allowStretch": true,
+                "allowClose": true,
+                "allowDrag": true,
+                "data":''},
 };
 
 

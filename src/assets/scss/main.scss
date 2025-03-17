@@ -178,4 +178,16 @@ input[type="checkbox"]:checked{
 #genStateOutput{
     margin: 0 auto;
 }
+.modal-content{
+    background-color: #9de9ae;
+    border-radius: 0;
+    border: rgb(110, 110, 110) solid 5px;
+    box-shadow: 5px 5px 0 #979797;
+}
+.modal-header{
+    border-bottom: none;
+}
+.modal-footer{
+    border-top: none;
+}
 
