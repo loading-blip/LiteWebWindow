@@ -1,5 +1,6 @@
 <script setup>
 import $ from 'jquery'
+import { onMounted } from 'vue';
     var out_of_vote = 0;
     $.ajax({
         url: '/current_ip_submission_num',
@@ -31,6 +32,14 @@ import $ from 'jquery'
     var data = {};
     source_data = JSON.parse(source_data);
     data = source_data;
+onMounted(()=>{
+    function focus(){
+        $('#vote_statuse').hide();
+    }
+    $('#item_name').on('change',focus())
+    $('#item_describe').on('change',focus())
+    $('#uploader').on('change',focus())
+})
 </script>
 
 
@@ -38,18 +47,22 @@ import $ from 'jquery'
 export default {
     methods: {
         uploadIdea(){
+            $('#vote_statuse').show();
             let uploadData = {
                 'item_name':$('#item_name').val(),
                 'uploader':$('#uploader').val(),
                 'item_describe':$('#item_describe').val(),
             }
+            $('#vote_statuse').show();
             if (Object.values(uploadData).includes('uploadData')){
-                $('#vote_statuse').show();
-                $('#vote_statuse').text('请好好的填满它');
+                
+                //未填满时提示
+                $('#vote_statuse').text('三缺一');
             }
             else{
                 $('#vote_statuse').hide();
             }
+            $('#vote_statuse').show();
             $.ajax({
                 url: '/upload_idea',
                 type: 'POST',
@@ -58,15 +71,14 @@ export default {
                 dataType: 'json',
                 success: function(response) {
                     console.log('Response received:', response);
-                    // var responseData = response;
-                    // createExpressWindow(responseData)
-                    // $('#quertStatus').text('');
-                    // $('#quertStatus').hide();
+                    //当提交灵感成功的提示
+                    $('#vote_statuse').text('尼的灵感所想的物料会突然就会从地里长出来的').css('color','black');
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
-                    // $('#quertStatus').text('网络错误');
-                    // $('#quertStatus').show();
+                    //当提交灵感失败的提示
+                    $('#vote_statuse').text(`提交失败(${xhr.status})请稍后尝试`).css('color','red');
+
                 }
             });
         },
@@ -84,12 +96,14 @@ export default {
                     console.log('Response received:', response);
                     $(`#vote_button${id}`).attr('disabled',true);
                     let status=response['status'];
+                    $('#vote_statuse').show();
                     if (status==='max_vote'){
-                        $('#vote_statuse').show();
-                        $('#vote_statuse').text('已达到投票最大限制');
+                        //当投票达到最大限制的提示
+                        $('#vote_statuse').text('您已经投过票了喵').css('color','black');
                     }
                     else{
-                        $('#vote_statuse').hide();
+                        //当投票成功提示
+                        $('#vote_statuse').text("感谢您的投票！").css('color','black');
                     }
                     
                     // var responseData = response;
@@ -99,8 +113,8 @@ export default {
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
-                    // $('#quertStatus').text('网络错误');
-                    // $('#quertStatus').show();
+                    //当提交投票失败的提示
+                    $('#vote_statuse').text(`提交失败(${xhr.status})请稍后尝试`).css('color','red');
                 }
             });
         }
@@ -123,16 +137,16 @@ export default {
         <tr v-for="(row, rowIndex) in data" :key="rowIndex">
             <td v-for="(col, colIndex) in row" :key="colIndex">
                 <template v-if="colIndex === row.length - 1">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="'#'+'describe_'+col">
                         查看
                     </button>
                         <!-- Modal -->
                     <teleport to="body">
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" :id="'describe_'+col" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" :aria-labelledby="'describe_'+col+'Label'" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">描述</h1>
+                                <h1 class="modal-title fs-5" :id="'describe_'+col+'Label'">描述</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -149,7 +163,7 @@ export default {
                 <template v-else>
                     {{ col }}
                 </template></td>
-            <td><input class="btn" value="vote" type="button" @click="vote(row[0])" :id="'vote_button'+row[0]"></td>
+            <td><input class="btn btn-primary" value="vote" type="button" @click="vote(row[0])" :id="'vote_button'+row[0]"></td>
         </tr>
         <tr>
             <td colspan="5"><p>有别的想法？</p></td>
@@ -161,7 +175,7 @@ export default {
                     <input type="text" placeholder="资源名称" class="form-control" id="item_name">
                     <input type="text" placeholder="留个名字" class="form-control" id="uploader">
                     <input type="text" placeholder="描述" class="form-control" id="item_describe">
-                    <button class="btn btn-outline-secondary" type="button" @click="uploadIdea()">提交灵感菇</button>
+                    <button class="btn btn-outline-secondary" type="button" @click="uploadIdea()" id="submit_upload">提交灵感菇</button>
                 </div>
             </td>
         </tr>
@@ -193,5 +207,9 @@ tr{
 #vote_statuse{
     color: rgb(216, 6, 6);
     text-align: center;
+}
+#submit_upload{
+    background-color: rgb(153, 224, 120);
+    color: #474747;
 }
 </style>

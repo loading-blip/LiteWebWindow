@@ -19,7 +19,8 @@
     for (const path in Domain) {
         windowDomain.push(path.substring(path.lastIndexOf('/')+1).slice(0,-4));
     }
-
+    console.log(windowTemplate);
+    windowTemplate.splice(windowTemplate.indexOf('StartMenu'),1)
 </script>
 <script>
 
