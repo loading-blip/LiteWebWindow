@@ -33,7 +33,7 @@ var taskList = {
     "voting": {"window":"windowTemplate",
                 "windowDomain": "voting",
                 "sizeW": "800px",
-                "sizeH": "500px",
+                "sizeH": "1000px",
                 "minimized": true,
                 "allowMinimized": true,
                 "allowStretch": true,

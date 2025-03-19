@@ -72,7 +72,7 @@ export default {
                 success: function(response) {
                     console.log('Response received:', response);
                     //当提交灵感成功的提示
-                    $('#vote_statuse').text('尼的灵感所想的物料会突然就会从地里长出来的').css('color','black');
+                    $('#vote_statuse').html('<a>刷新后将会显示于此</a><br/><a>尼的灵感所想的物料会突然就会从地里长出来的</a>').css('color','black');
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
@@ -137,16 +137,16 @@ export default {
         <tr v-for="(row, rowIndex) in data" :key="rowIndex">
             <td v-for="(col, colIndex) in row" :key="colIndex">
                 <template v-if="colIndex === row.length - 1">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="'#'+'describe_'+col">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="'#'+'describe_'+row[0]">
                         查看
                     </button>
                         <!-- Modal -->
                     <teleport to="body">
-                        <div class="modal fade" :id="'describe_'+col" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" :aria-labelledby="'describe_'+col+'Label'" aria-hidden="true">
+                        <div class="modal fade" :id="'describe_'+row[0]" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" :aria-labelledby="'describe_'+row[0]+'Label'" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" :id="'describe_'+col+'Label'">描述</h1>
+                                <h1 class="modal-title fs-5" :id="'describe_'+row[0]+'Label'">描述</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
