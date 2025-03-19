@@ -30,16 +30,6 @@ var taskList = {
                 "allowClose": true,
                 "allowDrag": true,
                 "data":''},
-    "voting": {"window":"windowTemplate",
-                "windowDomain": "voting",
-                "sizeW": "800px",
-                "sizeH": "1000px",
-                "minimized": true,
-                "allowMinimized": true,
-                "allowStretch": true,
-                "allowClose": true,
-                "allowDrag": true,
-                "data":''},
 };
 
 

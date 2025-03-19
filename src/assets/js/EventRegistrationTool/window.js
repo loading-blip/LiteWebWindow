@@ -92,7 +92,7 @@ export function addToTaskBar(taskName,defaultActiveState=false) {
 
 /**
  * 创建window组件
- * @param {string} attr - 窗口属性
+ * @param {Array} attr - 窗口属性
  * @returns {void}
  */
 export function GenerateWindow(attr){
