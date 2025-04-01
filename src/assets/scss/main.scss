@@ -2,6 +2,7 @@ $defaultWindowW: 900px;
 $defaultWindowH: 600px;
 $titleBarHeigth: 40px;
 
+
 .window{
     position: absolute;
     left: 1%;
@@ -11,6 +12,7 @@ $titleBarHeigth: 40px;
     background-color: #9de9ae;
     border: gray solid 5px;
     box-shadow: 10px 10px 0px rgba(53, 53, 53, 0.3);
+    padding-top: $titleBarHeigth;
     .windowTitleBar{
         font-weight: bold;
         text-align: center;
@@ -18,7 +20,9 @@ $titleBarHeigth: 40px;
         padding-bottom: 10px;
         border-bottom: gray solid 2px;
         height: $titleBarHeigth;
-        
+        position: absolute;
+        top: 0;
+        width: 100%;
         .WindowTitle{
             width: 100%;
             font-size: 20px;
@@ -191,3 +195,9 @@ input[type="checkbox"]:checked{
     border-top: none;
 }
 
+.domain{
+    padding: 20px;
+    overflow: scroll;
+    height: 100%;
+    overflow-x: hidden;
+}

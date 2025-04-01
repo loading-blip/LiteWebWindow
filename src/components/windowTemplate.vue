@@ -4,6 +4,7 @@ import {onMounted,shallowRef,defineAsyncComponent} from 'vue';
 import closeIcon from './icons/IconCloseWindow.vue'
 import MinimizeIcon from './icons/IconMinimize.vue'
 import '../assets/scss/main.scss';
+import '../assets/scss/scrollBar.scss';
 import { RegMinimizeWindowButton,RegDraggableHandles,RegCloseWindowButton} from '../assets/js/EventRegistrationTool/window.js';
 
 const props = defineProps({
@@ -137,7 +138,5 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.domain{
-    padding: 20px;
-}
+
 </style>

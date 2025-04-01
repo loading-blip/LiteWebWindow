@@ -2,6 +2,7 @@
 
 <script>
 import $ from 'jquery'
+import '../../assets/scss/scrollBar.scss';
 export default {
   props: {
     id: {
@@ -98,46 +99,33 @@ export default {
 
 <style scoped>
 .custom-input {
-  position: relative;
-  width: 300px;
-}
-
-.dropdown {
-  position: absolute;
-  width: 100%;
-  max-height: 150px;
-  overflow-y: auto;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-top: none;
-  display: none;
-  z-index: 1000;
-  background: darkgray;
-  color: white;
-}
-
-.dropdown-item {
-  padding: 8px;
-  cursor: pointer;
-  list-style: none;
-}
-
-.dropdown-item:hover {
-  /* background-color: #f0f0f0; */
-  background: gray;
-}
-::-webkit-scrollbar-thumb{
-  border-radius: none;
-  background-color: gray;
-}
-::-webkit-scrollbar{
-  background-color: darkgray;
-  width: 10px;
- 
-}
-::-webkit-scrollbar-button{
-  display: none;
+    position: relative;
+    width: 300px;
+  }
   
-}
+  .dropdown {
+    position: absolute;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    display: none;
+    z-index: 1000;
+    background: darkgray;
+    color: white;
+  }
+  
+  .dropdown-item {
+    padding: 8px;
+    cursor: pointer;
+    list-style: none;
+  }
+  
+  .dropdown-item:hover {
+    /* background-color: #f0f0f0; */
+    background: gray;
+  }
 </style>
