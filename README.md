@@ -1,6 +1,6 @@
 # LiteWebWindow Project
 
-`ver 0.2.4`
+`ver 0.2.4.1`
 
 A lightweight window simulation front-end.
 
@@ -26,7 +26,7 @@ Modify taskList var in main.js to add some new window (current usage method)
 
 ![gif](img/Action-v0.2.3.gif "Preview")
 
-![png](img/v0.2.4.png "Gemerate Menu Preview")
+![png](img/v0.2.4.1.png "Gemerate Menu Preview")
 
 ## Documents
 
