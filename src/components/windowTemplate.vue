@@ -103,22 +103,25 @@ onMounted(() => {
         document.getElementById(props.windowTitle+'_Window').querySelectorAll('.closeWindow')[0].classList.replace('closeWindow','disableCloseWindow')
     }
     //窗口大小调整事件
+    const windowBody = document.getElementById(props.windowTitle+'_Window');
+    windowBody.style.overflow = 'hidden';
     if (props.allowStretchX) {
         const topResize = document.querySelector('.left-resize-x');
         const bottomResize = document.querySelector('.right-resize-x');
         RegWindowResize([topResize, bottomResize],[]);
+        windowBody.style.resize = 'vertical';
     }
     if (props.allowStretchY) {
         const leftResize = document.querySelector('.top-resize-y');
         const rightResize = document.querySelector('.bottom-resize-y');
         RegWindowResize([],[leftResize,rightResize]);
+        windowBody.style.resize = 'horizontal';
     }
-    //处理传入的参数
-    const windowBody = document.getElementById(props.windowTitle+'_Window');
-    if (props.allowStretch) {
-        windowBody.style.overflow = 'hidden';
+    if (props.allowStretchX && props.allowStretchY){
         windowBody.style.resize = 'both';
     }
+    //处理传入的参数
+    
     windowBody.style.width = props.windowWidth;
     windowBody.style.height = props.windowHeight;
     if (props.minimized) {
