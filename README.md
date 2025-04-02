@@ -1,6 +1,6 @@
 # LiteWebWindow Project
 
-`ver 0.2.4.1`
+`ver 0.2.5`
 
 A lightweight window simulation front-end.
 
@@ -15,7 +15,7 @@ Modify taskList var in main.js to add some new window (current usage method)
 * Interactive addition of window functionality ***(Done!)***
   * Add StartMenu. ***(Done)***
   * Add Close Window Button ***(Done)***
-  * Add Generate Window *(There is currently no function available)* ***(Done)***
+  * Add Generate Window ***(Done)***
 * Window style control ***(Future)***
 * More template window style ***(LongFuture)***
 * Add Task Manager whose can Close/Minimize/TopUp/Control the window ***(Long Long Future)***

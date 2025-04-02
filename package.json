@@ -1,7 +1,7 @@
 {
   "name": "lite_window",
   "private": true,
-  "version": "0.2.4.1",
+  "version": "0.2.5",
   "type": "module",
   "scripts": {
     "dev": "vite",

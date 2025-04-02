@@ -5,7 +5,7 @@ import closeIcon from './icons/IconCloseWindow.vue'
 import MinimizeIcon from './icons/IconMinimize.vue'
 import '../assets/scss/main.scss';
 import '../assets/scss/scrollBar.scss';
-import { RegMinimizeWindowButton,RegDraggableHandles,RegCloseWindowButton} from '../assets/js/EventRegistrationTool/window.js';
+import { RegMinimizeWindowButton,RegDraggableHandles,RegCloseWindowButton,RegWindowResize} from '../assets/js/EventRegistrationTool/window.js';
 
 const props = defineProps({
     windowTitle: {
@@ -36,7 +36,11 @@ const props = defineProps({
         type: Boolean,
         default: true,
     },
-    allowStretch: {
+    allowStretchX: {
+        type: Boolean,
+        default: true,
+    },
+    allowStretchY: {
         type: Boolean,
         default: true,
     },
@@ -98,7 +102,17 @@ onMounted(() => {
         //修改关闭按钮样式
         document.getElementById(props.windowTitle+'_Window').querySelectorAll('.closeWindow')[0].classList.replace('closeWindow','disableCloseWindow')
     }
-
+    //窗口大小调整事件
+    if (props.allowStretchX) {
+        const topResize = document.querySelector('.left-resize-x');
+        const bottomResize = document.querySelector('.right-resize-x');
+        RegWindowResize([topResize, bottomResize],[]);
+    }
+    if (props.allowStretchY) {
+        const leftResize = document.querySelector('.top-resize-y');
+        const rightResize = document.querySelector('.bottom-resize-y');
+        RegWindowResize([],[leftResize,rightResize]);
+    }
     //处理传入的参数
     const windowBody = document.getElementById(props.windowTitle+'_Window');
     if (props.allowStretch) {
@@ -117,6 +131,10 @@ onMounted(() => {
 
 <template>
     <div class="window draggable-container" :id="windowTitle+'_Window'">
+        <div class="top-resize-y"></div>
+        <div class="bottom-resize-y"></div>
+        <div class="left-resize-x"></div>
+        <div class="right-resize-x"></div>
         <div class="windowTitleBar draggable-handle">
             <h1 class="WindowTitle">{{ windowTitle }}</h1>
 
@@ -134,6 +152,7 @@ onMounted(() => {
             :data="task.props.data"
         />
         </div>
+        
     </div>
 </template>
 

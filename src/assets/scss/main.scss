@@ -13,6 +13,7 @@ $titleBarHeigth: 40px;
     border: gray solid 5px;
     box-shadow: 10px 10px 0px rgba(53, 53, 53, 0.3);
     padding-top: $titleBarHeigth;
+    overflow: visible;
     .windowTitleBar{
         font-weight: bold;
         text-align: center;
@@ -23,6 +24,7 @@ $titleBarHeigth: 40px;
         position: absolute;
         top: 0;
         width: 100%;
+        z-index: 0;
         .WindowTitle{
             width: 100%;
             font-size: 20px;
@@ -200,4 +202,32 @@ input[type="checkbox"]:checked{
     overflow: scroll;
     height: 100%;
     overflow-x: hidden;
+}
+.window>.top-resize-y,.window>.bottom-resize-y{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    cursor: ns-resize;
+    z-index: 1;
+}
+.window>.top-resize-y{
+    top: -5px;
+}
+.window>.bottom-resize-y{
+    bottom: -5px;
+}
+.window>.left-resize-x,.window>.right-resize-x{
+    position: absolute;
+    width: 7px;
+    height: 100%;
+    top: 0;
+    cursor: ew-resize;
+    z-index: 1;
+}
+.window>.left-resize-x{
+    left: -5px;
+}
+.window>.right-resize-x{
+    right: -5px;
 }

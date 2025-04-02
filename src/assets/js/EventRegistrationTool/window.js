@@ -129,4 +129,88 @@ export function GenerateWindow(attr){
     else{
         console.error(`no such component:${componentPath}`);
     }
+    
 }
+
+/**
+ * 拉伸window组件注册
+ * @param {Array} resizeX - 左右依次顺序的div节点列表(空列表则不进行处理)
+ * @param {Array} resizeY - 上下依次顺序的div节点列表(空列表则不进行处理)
+ * @returns {void}
+ */
+export function RegWindowResize(resizeX, resizeY) {
+    // 合并所有调整大小的边
+    const resizers = [...(resizeX || []), ...(resizeY || [])];
+    
+    // 为每个调整边添加事件监听
+    resizers.forEach(resizer => {
+      resizer.addEventListener('mousedown', initResize);
+    });
+  
+    function initResize(e) {
+      e.preventDefault();
+      const windowElem = this.parentElement;
+      const rect = windowElem.getBoundingClientRect();
+      
+      // 初始位置和尺寸
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const startWidth = rect.width;
+      const startHeight = rect.height;
+      const startLeft = rect.left;
+      const startTop = rect.top;
+      
+      // 确定调整方向
+      const isLeft = resizeX && resizeX[0] === this;
+      const isRight = resizeX && resizeX[1] === this;
+      const isTop = resizeY && resizeY[0] === this;
+      const isBottom = resizeY && resizeY[1] === this;
+  
+      // 设置最小尺寸
+      const minSize = 50;
+  
+      function onMouseMove(e) {
+        e.preventDefault();
+        
+        // 计算尺寸变化
+        if (isRight) {  // 右侧调整
+          const newWidth = startWidth + (e.clientX - startX);
+          if (newWidth >= minSize) {
+            windowElem.style.width = `${newWidth}px`;
+          }
+        } 
+        else if (isLeft) {  // 左侧调整
+          const newWidth = startWidth - (e.clientX - startX);
+          const newLeft = startLeft + (e.clientX - startX);
+          if (newWidth >= minSize) {
+            windowElem.style.width = `${newWidth}px`;
+            windowElem.style.left = `${newLeft}px`;
+          }
+        }
+        else if (isBottom) {  // 底部调整
+          const newHeight = startHeight + (e.clientY - startY);
+          if (newHeight >= minSize) {
+            windowElem.style.height = `${newHeight}px`;
+          }
+        }
+        else if (isTop) {  // 顶部调整
+          const newHeight = startHeight - (e.clientY - startY);
+          const newTop = startTop + (e.clientY - startY);
+          if (newHeight >= minSize) {
+            windowElem.style.height = `${newHeight}px`;
+            windowElem.style.top = `${newTop}px`;
+          }
+        }
+      }
+  
+      //鼠标释放处理函数
+      function onMouseUp() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+      }
+  
+      // 添加全局事件监听
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    }
+  }
