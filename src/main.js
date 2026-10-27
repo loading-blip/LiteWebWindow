@@ -9,21 +9,9 @@ import $ from 'jquery'
 
 
 var taskList = {
-    "公告": {"window":"windowTemplate",
-            "windowDomain": "noticeBoard",
-            "sizeW": "500px",
-            "sizeH": "500px",
-            "minimized": true,
-            "allowMinimized": true,
-            "allowStretchX": true,
-            "allowStretchY": true,
-            "allowClose": true,
-            "allowDrag": true,
-            "data":''},
-
     "灰常小聚": {"window":"windowTemplate",
                 "windowDomain": "hcPay",
-                "sizeW": "95%",
+                "sizeW": "500px",
                 "sizeH": "85%",
                 "minimized": false,
                 "allowMinimized": true,
@@ -32,6 +20,17 @@ var taskList = {
                 "allowClose": true,
                 "allowDrag": true,
                 "data":''},
+    "公告": {"window":"windowTemplate",
+            "windowDomain": "noticeBoard",
+            "sizeW": "500px",
+            "sizeH": "85%",
+            "minimized": false,
+            "allowMinimized": true,
+            "allowStretchX": true,
+            "allowStretchY": true,
+            "allowClose": true,
+            "allowDrag": true,
+            "data":''}
 };
 
 

@@ -7,9 +7,10 @@ const props = defineProps({
 });
 </script>
 <template>
-    <h2>NoticeBoard</h2>
-    <h3>A sample Window</h3>
-    <p>You can Close/Minimize/TopUp/Control window now!</p>
+    <h2>UwU</h2>
+    <p>点击右上角<b>最小化</b>或<b>叉叉</b>，或<b>拖动窗口</b></p>
+    <p>即可看到下面的<b>支付界面</b></p>
+    <p>>ᴗoಣ</p>
     <p id ="myLink" ><a href="https://github.com/loading-blip/LiteWebWindow" target="_blank">GitHub</a></p>
 </template>
 
