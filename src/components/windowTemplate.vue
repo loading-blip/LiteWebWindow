@@ -120,10 +120,20 @@ onMounted(() => {
     if (props.allowStretchX && props.allowStretchY){
         windowBody.style.resize = 'both';
     }
-    //处理传入的参数
-    
-    windowBody.style.width = props.windowWidth;
-    windowBody.style.height = props.windowHeight;
+    //处理传入的参数，避免超出屏幕
+    const getCssValue = (value) => {
+        const numericValue = Number.parseFloat(value);
+        return Number.isFinite(numericValue) ? numericValue : 0;
+    };
+
+    const maxWindowWidth = Math.max(0, window.innerWidth - 20);
+    const maxWindowHeight = Math.max(0, window.innerHeight - 20);
+
+    const finalWindowWidth = getCssValue(props.windowWidth) > maxWindowWidth ? `${maxWindowWidth}px` : props.windowWidth;
+    const finalWindowHeight = getCssValue(props.windowHeight) > maxWindowHeight ? `${maxWindowHeight}px` : props.windowHeight;
+
+    windowBody.style.width = finalWindowWidth;
+    windowBody.style.height = finalWindowHeight;
     if (props.minimized) {
         windowBody.style.display = 'none';
     }
